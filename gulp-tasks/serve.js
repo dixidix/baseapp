@@ -8,9 +8,9 @@ function serve(gulp, $){
 
 	function serve(){
 		browserSync({
+			browser: ["google-chrome"],
 			server: {
-				baseDir: "./",
-				browser: "google chrome"
+				baseDir: "./"
 			}
 		});
 		gulp.watch(['app/styles/**/*.scss  ','app/routes/**/*.scss','app/components/**/*.scss'],['styles', reload]);

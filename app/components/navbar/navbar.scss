@@ -1,0 +1,16 @@
+@import '../../styles/mixins/main';
+@import '../../styles/modules/main';
+
+
+.navbar{
+    width: 96%;
+    min-height: 60px;
+    background-color: $black;
+    color:white;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding:0 2%;
+}

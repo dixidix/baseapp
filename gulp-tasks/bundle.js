@@ -1,0 +1,53 @@
+function bundle(gulp, $){
+
+	var 	browserify = require('browserify'),
+	source = require('vinyl-source-stream'),
+	glob = require('glob'),
+	path = require('path'),
+	concat = require('gulp-concat'),
+	rename = require('gulp-rename'),
+	uglify = require('gulp-uglify'),  
+	buffer = require('vinyl-buffer');
+
+	$.paths.bundle = {
+		resources: [
+		'./node_modules/jquery/dist/jquery.min.js',
+		'./node_modules/angular/angular.min.js',
+		'./node_modules/angular-ui-router/release/angular-ui-router.min.js',
+		'./node_modules/angular-animate/angular-animate.min.js',
+		'./node_modules/angular-aria/angular-aria.js',
+		'./node_modules/angular-sanitize/angular-sanitize.min.js'
+		]
+	};
+
+
+	function buildLibs(){
+		return browserify($.paths.bundle.resources)
+		.bundle()
+		.pipe(source("libs.bundle.js"))
+		.pipe(gulp.dest("./dist"))		
+		.pipe(rename('libs.bundle.min.js'))
+		.pipe(buffer())
+		.pipe(uglify())
+		.pipe(gulp.dest("./dist"));
+	}
+
+	function buildApp(){
+		var files = glob.sync('./app/*.js','./app/**/**/*.js');
+		return browserify({entries: files})
+		.bundle()
+		.pipe(source("app.bundle.js"))
+		.pipe(gulp.dest("./dist"))		
+		.pipe(rename('app.bundle.min.js'))
+		.pipe(buffer())
+		.pipe(uglify())
+		.pipe(gulp.dest("./dist"));
+	}	
+
+	return {
+		buildLibs: buildLibs,
+		buildApp: buildApp
+	};
+}
+
+module.exports = bundle;

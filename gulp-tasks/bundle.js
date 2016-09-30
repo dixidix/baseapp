@@ -15,7 +15,6 @@ function bundle(gulp, $){
 		'./node_modules/angular/angular.js',
 		'./node_modules/angular-ui-router/release/angular-ui-router.min.js',
 		'./node_modules/angular-animate/angular-animate.min.js',
-		'./node_modules/angular-aria/angular-aria.js',
 		'./node_modules/angular-sanitize/angular-sanitize.min.js'
 		]
 	};
